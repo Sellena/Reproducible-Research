@@ -1,0 +1,80 @@
+Course Project 1
+----------------
+
+
+Loading and preprocessing the data
+
+```{r}
+data <- read.csv("E:/S/Coursera/DS-JHU/5Reproducible Research/assignment 2/activity.csv", header = T, sep=",")
+summary(data)
+```
+
+```{r}
+str(data)
+```
+
+```{r}
+dim(data)
+```
+
+```{r}
+head(data)
+```
+
+
+What is mean total number of steps taken per day?
+
+```{r, echo=TRUE}
+data1 <- tapply(data$steps,data$date,sum)
+hist(data1,xlab="Numbers of steps taken per day",main="Histogram of the total number of steps taken per day")
+```
+
+
+What is the average daily activity pattern?
+```{r,echo = TRUE}
+library("dplyr")
+data2 <- filter(data,!is.na(data$steps))
+data22 <- aggregate(data=data2,steps ~ interval,mean)
+plot(data22$interval,data22$steps,type="l",xlab="5-minute interval", ylab="Average number of steps taken")
+```
+
+
+Imputing missing values
+1. Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with NAs)
+```{r,echo=TRUE}
+sum(!is.na(data))
+```
+
+2. Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.
+```{r,echo=TRUE}
+data3 <- data
+na_datarows <- is.na(data3$steps)
+data33 <- tapply(data3$steps,data3$interval,mean,na.rm=T)
+
+```
+
+3. Create a new dataset that is equal to the original dataset but with the missing data filled in.
+```{r,echo=TRUE}
+data3$steps[na_datarows] <- data33[as.character(data3$interval[na_datarows])]
+head(data3)
+```
+
+4. Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
+```{r,echo=TRUE}
+data333 <- tapply(data3$steps,data3$date,sum)
+hist(data333,xlab="Mean & median total number of steps taken per day",main="Histogram of the total number of steps taken per day")
+```
+
+
+Are there differences in activity patterns between weekdays and weekends?
+For this part the weekdays() function may be of some help here. Use the dataset with the filled-in missing values for this part.
+1. Create a new factor variable in the dataset with two levels ¨C ¡°weekday¡± and ¡°weekend¡± indicating whether a given date is a weekday or weekend day.
+```{r,echo=TRUE}
+
+```
+
+2. Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). See the README file in the GitHub repository to see an example of what this plot should look like using simulated data.
+```{r,echo=TRUE}
+
+
+```
