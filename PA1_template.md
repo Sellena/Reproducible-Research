@@ -70,7 +70,6 @@ hist(data1,xlab="Numbers of steps taken per day",main="Histogram of the total nu
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
-![](PA1_template_files/figure-html/unnamed-chunk-6-1.png?raw=true)
 
 
 What is the average daily activity pattern?
