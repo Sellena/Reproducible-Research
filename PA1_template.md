@@ -1,10 +1,14 @@
-Loading and preprocessing the data
 
 
 ```r
 library(knitr)
 library(rmarkdown)
 library(markdown)
+```
+
+Loading and preprocessing the data
+
+```r
 data <- read.csv("E:/S/Coursera/DS-JHU/5Reproducible Research/assignment 2/activity.csv", header = T, sep=",")
 summary(data)
 ```
@@ -65,7 +69,7 @@ data1 <- tapply(data$steps,data$date,sum)
 hist(data1,xlab="Numbers of steps taken per day",main="Histogram of the total number of steps taken per day")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
 
 
 What is the average daily activity pattern?
@@ -97,7 +101,7 @@ data22 <- aggregate(data=data2,steps ~ interval,mean)
 plot(data22$interval,data22$steps,type="l",xlab="5-minute interval", ylab="Average number of steps taken")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
 
 
 Imputing missing values
@@ -143,7 +147,7 @@ data333 <- tapply(data3$steps,data3$date,sum)
 hist(data333,xlab="Mean & median total number of steps taken per day",main="Histogram of the total number of steps taken per day")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
 
 
 Are there differences in activity patterns between weekdays and weekends?
@@ -235,4 +239,4 @@ library(lattice)
 xyplot(x~Group.1|Group.2,data=data44,layout=c(1,2),type="l",xlab="5-minute interval",ylab="Steps")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-15-1.png)<!-- -->
