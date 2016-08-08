@@ -4,6 +4,7 @@ Loading and preprocessing the data
 ```r
 library(knitr)
 library(rmarkdown)
+library(markdown)
 data <- read.csv("E:/S/Coursera/DS-JHU/5Reproducible Research/assignment 2/activity.csv", header = T, sep=",")
 summary(data)
 ```
