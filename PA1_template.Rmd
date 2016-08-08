@@ -70,11 +70,32 @@ Are there differences in activity patterns between weekdays and weekends?
 For this part the weekdays() function may be of some help here. Use the dataset with the filled-in missing values for this part.
 1. Create a new factor variable in the dataset with two levels ¨C ¡°weekday¡± and ¡°weekend¡± indicating whether a given date is a weekday or weekend day.
 ```{r,echo=TRUE}
-
+data4 <- data3
+data4$week_type<-data4$date
+head(data4)
+data4$date <- as.Date(data4$date)
+data4$week_type <- as.Date(data4$week_type)
+weekend <- function(actdate) {ifelse(weekdays(actdate) == "ÐÇÆÚÁù" | weekdays(actdate) == "ÐÇÆÚÈÕ","weekend","weekday")}
+data4 <- mutate(data4, week_type = weekend(data4$date))
+head(data4)
 ```
 
 2. Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). See the README file in the GitHub repository to see an example of what this plot should look like using simulated data.
 ```{r,echo=TRUE}
+data44 <- aggregate(data4$steps,list(data4$interval, data4$week_type),sum)
+head(data44)
+```
 
+```{r,echo=TRUE}
+data44weekend <- subset(data44,data44$Group.2=="weekend")
+data44weekday <- subset(data44,data44$Group.2=="weekday")
 
+dim(data44)
+dim(data44weekday)
+dim(data44weekend)
+```
+
+```{r,echo=TRUE}
+library(lattice)
+xyplot(x~Group.1|Group.2,data=data44,layout=c(1,2),type="l",xlab="5-minute interval",ylab="Steps")
 ```
